@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+@layer components {
+    .btn {
+        @apply inline-flex justify-center items-center;
+        @apply px-4 py-2 rounded-lg;;
+    }
+
+    .btn-primary {
+        @apply bg-blue-500 text-white;
+    }
+
+    .btn-secondary {
+        @apply bg-gray-500 text-white;
+    }
+
+    .btn-danger {
+        @apply bg-red-500 text-white;
+    }   
+}
+

@@ -1,0 +1,37 @@
+<div class="flex flex-col gap-6"> 
+    <app-title title="Tasks Todo" subtitle=""></app-title>
+    <div>
+        <form class="flex gap-2" (submit)="AddTask($event, titleInput, descriptionInput)">
+            <input #titleInput type="text" placeholder="Task title" class="flex-1 p-2 rounded bg-zinc-700 text-white border border-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input #descriptionInput type="text" placeholder="Task description" class="flex-1 p-2 rounded bg-zinc-700 text-white border border-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Task</button>
+        </form>
+    </div>
+    <div class="flex flex-col gap-2">
+        @for (item of tasksService.items(); track $index) {
+            <div class="p-4 border border-zinc-800 rounded-lg flex items-center gap-4">
+               <span class="flex-1">{{ item.title }}</span>
+               <span class="flex-1 text-zinc-500">{{ item.description }}</span>
+               <div [class.bg-green-500]="item.completed"
+                    [class.bg-yellow-500]="!item.completed"
+                    class="px-4 py-1 rounded-full text-sm"> 
+                    <span> {{ item.completed ? 'Completed' : 'Pending' }}</span>
+                </div>
+                <div> 
+                    <button 
+                    [class.bg-green-500]="item.completed"
+                    [class.bg-zinc-500]="!item.completed"
+                    class="btn mr-2"
+                    (click)="tasksService.toggleTask(item.id)">
+                    <mat-icon fontSet="material-symbols-outlined">{{ item.completed ? 'check_circle' : 'pending' }}</mat-icon>
+                </button>
+                <button 
+                    class="btn bg-red-500 text-white hover:bg-red-600"
+                    (click)="tasksService.removeTask(item.id)">
+                    <mat-icon fontSet="material-symbols-outlined">delete</mat-icon>
+                </button>
+            </div>
+            </div>
+        }
+    </div>
+</div>
